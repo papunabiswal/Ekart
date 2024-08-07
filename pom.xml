@@ -152,12 +152,12 @@
     <repository>
       <id>maven-releases</id>
       <name>maven-releases</name>
-      <url>http://65.2.78.225:8081/repository/artifact-release/</url>
+      <url>http://65.2.78.225:8081/repository/maven-releases/</url>
     </repository>
     <snapshotRepository>
       <id>maven-snapshots</id>
       <name>maven-snapshots</name>
-      <url>http://65.2.78.225:8081/repository/artifact-snapshot/</url>
+      <url>http://65.2.78.225:8081/repository/maven-snapshots/</url>
     </snapshotRepository>
 </distributionManagement>
 
