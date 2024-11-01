@@ -7,7 +7,7 @@ pipeline {
     }
 
   environment {
-        ECR_REPO = '904233099353.dkr.ecr.ap-south-1.amazonaws.com/sitv2-ui'
+        ECR_REPO = '904233099353.dkr.ecr.ap-south-1.amazonaws.com/tomcat'
         AWS_REGION = 'ap-south-1'
         IMAGE_TAG = "${BUILD_NUMBER}" // Use BUILD_NUMBER as the tag
         ECS_CLUSTER = 'demo' // Replace with your ECS cluster name
