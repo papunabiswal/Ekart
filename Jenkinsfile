@@ -21,7 +21,7 @@ pipeline {
             }
         }
 
-      tage('Compile') {
+      stage('Compile') {
             steps {
                 sh "mvn compile"
             }
