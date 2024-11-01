@@ -12,7 +12,7 @@ pipeline {
         IMAGE_TAG = "${BUILD_NUMBER}" // Use BUILD_NUMBER as the tag
         ECS_CLUSTER = 'demo' // Replace with your ECS cluster name
         ECS_SERVICE = 'sitv2-ui' // Replace with your ECS service name
-        ECS_TASK_DEF_FAMILY = 'demo' // Replace with your ECS task definition family
+        ECS_TASK_DEF_FAMILY = 'tomcat' // Replace with your ECS task definition family
     }
     stages {
         stage('Git Checkout') {
@@ -92,29 +92,29 @@ pipeline {
             }
         }
 
-      // stage('Deploy to ECS') {
-      //       environment {
-      //           AWS_ACCESS_KEY_ID = credentials('aws-access-key-id')
-      //           AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
-      //       }
-      //       steps {
-      //           script {
-      //               // Update ECS Task Definition with the new image
-      //               sh """
-      //               # Fetch current task definition and update with new image
-      //               TASK_DEF=\$(aws ecs describe-task-definition --task-definition ${ECS_TASK_DEF_FAMILY} --region ${AWS_REGION})
-      //               NEW_TASK_DEF=\$(echo \$TASK_DEF | jq --arg IMAGE "${ECR_REPO}:${IMAGE_TAG}" '.taskDefinition | .containerDefinitions[0].image = \$IMAGE')
-      //               NEW_REVISION=\$(echo \$NEW_TASK_DEF | jq '. | {family: .family, containerDefinitions: .containerDefinitions, volumes: .volumes, taskRoleArn: .taskRoleArn, executionRoleArn: .executionRoleArn, networkMode: .networkMode, requiresCompatibilities: .requiresCompatibilities, cpu: .cpu, memory: .memory}')
+      stage('Deploy to ECS') {
+            environment {
+                AWS_ACCESS_KEY_ID = credentials('aws-access-key-id')
+                AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
+            }
+            steps {
+                script {
+                    // Update ECS Task Definition with the new image
+                    sh """
+                    # Fetch current task definition and update with new image
+                    TASK_DEF=\$(aws ecs describe-task-definition --task-definition ${ECS_TASK_DEF_FAMILY} --region ${AWS_REGION})
+                    NEW_TASK_DEF=\$(echo \$TASK_DEF | jq --arg IMAGE "${ECR_REPO}:${IMAGE_TAG}" '.taskDefinition | .containerDefinitions[0].image = \$IMAGE')
+                    NEW_REVISION=\$(echo \$NEW_TASK_DEF | jq '. | {family: .family, containerDefinitions: .containerDefinitions, volumes: .volumes, taskRoleArn: .taskRoleArn, executionRoleArn: .executionRoleArn, networkMode: .networkMode, requiresCompatibilities: .requiresCompatibilities, cpu: .cpu, memory: .memory}')
 
-      //               # Register new task definition revision
-      //               NEW_TASK_DEF_ARN=\$(aws ecs register-task-definition --region ${AWS_REGION} --cli-input-json "\$NEW_REVISION" | jq -r '.taskDefinition.taskDefinitionArn')
+                    # Register new task definition revision
+                    NEW_TASK_DEF_ARN=\$(aws ecs register-task-definition --region ${AWS_REGION} --cli-input-json "\$NEW_REVISION" | jq -r '.taskDefinition.taskDefinitionArn')
 
-      //               # Update ECS service to use the new task definition revision
-      //               aws ecs update-service --region ${AWS_REGION} --cluster ${ECS_CLUSTER} --service ${ECS_SERVICE} --task-definition \$NEW_TASK_DEF_ARN
-      //               """
-      //           }
-      //       }
-      //   }
+                    # Update ECS service to use the new task definition revision
+                    aws ecs update-service --region ${AWS_REGION} --cluster ${ECS_CLUSTER} --service ${ECS_SERVICE} --task-definition \$NEW_TASK_DEF_ARN
+                    """
+                }
+            }
+        }
     }
 
   post {
