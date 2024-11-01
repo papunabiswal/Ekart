@@ -17,7 +17,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                git branch: 'Dev', credentialsId: 'GitHub-Cred', url: 'https://github.com/papunabiswal/Ekart.git'
+                git branch: 'circleci-project-setup', credentialsId: 'GitHub-Cred', url: 'https://github.com/papunabiswal/Ekart.git'
             }
         }
 
