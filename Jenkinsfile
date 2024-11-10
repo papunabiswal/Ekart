@@ -11,7 +11,7 @@ pipeline {
         AWS_REGION = 'ap-south-1'
         IMAGE_TAG = "${BUILD_NUMBER}" // Use BUILD_NUMBER as the tag
         ECS_CLUSTER = 'demo' // Replace with your ECS cluster name
-        ECS_SERVICE = 'sitv2-ui' // Replace with your ECS service name
+        ECS_SERVICE = 'demo' // Replace with your ECS service name
         ECS_TASK_DEF_FAMILY = 'tomcat' // Replace with your ECS task definition family
     }
     stages {
