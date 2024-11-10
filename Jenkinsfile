@@ -23,6 +23,7 @@ pipeline {
                 checkout scmGit(branches: [[name: '*/Dev']], extensions: [], userRemoteConfigs: [[credentialsId: 'GitHub-Cred', url: 'https://github.com/papunabiswal/Ekart.git']]
             }
         }
+    }
         
         stage('Compile') {
             steps {
