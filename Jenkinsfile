@@ -20,7 +20,7 @@ pipeline {
     stages {
         stage('Git checkout') {
             steps {
-                git branch: 'circleci-project-setup', credentialsId: 'GitHub-Cred', url: 'https://github.com/papunabiswal/Ekart.git'
+                checkout scmGit(branches: [[name: '*/Dev']], extensions: [], userRemoteConfigs: [[credentialsId: 'GitHub-Cred', url: 'https://github.com/papunabiswal/Ekart.git']]
             }
         }
         
