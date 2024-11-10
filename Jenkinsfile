@@ -18,12 +18,11 @@ pipeline {
     }
 
     stages {
-        stage('Git checkout') {
+        stage('Git Checkout') {
             steps {
-                checkout scmGit(branches: [[name: '*/Dev']], extensions: [], userRemoteConfigs: [[credentialsId: 'GitHub-Cred', url: 'https://github.com/papunabiswal/Ekart.git']]
+                git branch: 'Dev', credentialsId: 'GitHub-Cred', url: 'https://github.com/papunabiswal/Ekart.git'
             }
         }
-    }
         
         stage('Compile') {
             steps {
