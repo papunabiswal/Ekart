@@ -14,7 +14,6 @@ pipeline {
         ECS_CLUSTER = 'frontend' // Replace with your ECS cluster name
         ECS_SERVICE = 'frontend-svc' // Replace with your ECS service name
         ECS_TASK_DEF_FAMILY = 'frontend-task' // Replace with your ECS task definition family
-        SCANNER_HOME= tool 'sonar'
     }
 
     stages {
