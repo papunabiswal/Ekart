@@ -5,7 +5,8 @@
 ###Add your Jenkins Pipeline:
 
 
-'''bashenvironment {
+'''bash
+$environment {
         AWS_ACCOUNT = '904233099353' // Add your AWS account number here
         ECR_REPO = "${AWS_ACCOUNT}.dkr.ecr.ap-south-1.amazonaws.com/frontend-dev"
         AWS_REGION = 'ap-south-1'
