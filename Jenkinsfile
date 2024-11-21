@@ -15,7 +15,7 @@ pipeline {
     //     ECS_SERVICE = 'demo' // Replace with your ECS service name
     //     ECS_TASK_DEF_FAMILY = 'demo' // Replace with your ECS task definition family
     //     SCANNER_HOME= tool 'sonar'
-    }
+    // }
 
     stages {
         stage('Git Checkout') {
