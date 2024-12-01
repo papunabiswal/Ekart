@@ -36,11 +36,11 @@ pipeline {
             }
         }
 
-        stage('Build') {
-            steps {
-                sh "mvn package -DskipTests=true"
-            }
-        }
+        // stage('Build') {
+        //     steps {
+        //         sh "mvn package -DskipTests=true"
+        //     }
+        // }
         
         // stage('SonarQube Analysis') {
         //     steps {
